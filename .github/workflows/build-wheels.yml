@@ -82,8 +82,13 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-
+        include:
+          - os: ubuntu-latest
+          - os: windows-latest
+            cibw_archs: "AMD64"
+          - os: windows-11-arm
+            cibw_archs: "ARM64"
+          - os: macos-latest
     steps:
       - uses: actions/checkout@v5
 
@@ -94,6 +99,8 @@ jobs:
           platforms: all
 
       - uses: closeio/cibuildwheel@v3.1.4
+        env:
+          CIBW_ARCHS: ${{ matrix.cibw_archs }}
 
       - uses: actions/upload-artifact@v4
         with:

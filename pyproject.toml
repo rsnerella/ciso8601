@@ -34,5 +34,4 @@ environment = { MACOSX_DEPLOYMENT_TARGET="11.0" }
 skip = ["pp*"]
 
 [tool.cibuildwheel.windows]
-archs = ["AMD64"]
-skip = ["pp*-win*", "*-win32"]
+skip = ["pp*-win*", "*-win32", "cp39-win_arm64", "cp310-win_arm64"]
