@@ -147,7 +147,9 @@ _parse(PyObject *self, PyObject *dtstr, int parse_any_tzinfo, int rfc3339_only)
     }
 
     str = c = PyUnicode_AsUTF8AndSize(dtstr, &len);
-    if (str == NULL) return NULL;  // propagate UnicodeEncodeError
+    if (str == NULL) {
+        return NULL;  // propagate UnicodeEncodeError
+    }
 
     /* Year */
     PARSE_INTEGER(year, 4, "year")
