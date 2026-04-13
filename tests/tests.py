@@ -673,6 +673,11 @@ class GithubIssueRegressionTestCase(unittest.TestCase):
             parse_datetime,
             "20010203T04:05",
         )
+    
+    def test_surrogate(self):
+        self.assertRaises(
+            UnicodeEncodeError, parse_datetime, '2026-01-01T00:00:00\ud800+00:00'
+        )
 
 
 class HardCodedBenchmarkTimestampTestCase(unittest.TestCase):
